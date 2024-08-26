@@ -1,8 +1,12 @@
+import {aleatorio} from './aleatorio.js';
+import {perguntas} from './perguntas.js';
+
 const caixaPrincipal = document.querySelector(".caixa-principal");
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
+const botaoJogarNovamente = document.querySelector('.novamente-btn');
 
 const perguntas = [
     {
@@ -10,12 +14,17 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Isso é assustador!",
-                afirmacao: "afirmacao"
+                afirmacao: [
+                    "No início ficou com medo do que essa tecnologia pode fazer."
+                    ,"Achou assustador pensar na velocidade na qual a tecnologia está avançando."
+                    ]
             },
             {
                 texto: "Isso é maravilhoso!",
-                afirmacao: "afirmacao"
-            }           
+                afirmacao: [
+                    "Quis saber como usar IA no seu dia a dia.",
+                    "Pensou que IA pode ajudar em tarefas da sua vida." ]
+                    }          
             
         ]
     },
@@ -108,10 +117,18 @@ function respostaSelecionada(opcaoSelecionada){
     mostraPergunta();
 }
 
+function jogaNovamente(){
+    atual = 0;
+    historiaFinal = ""; 
+    caixaResultado.classList.remove("mostrar");
+    mostraPergunta();
+}
+
 function mostraResultado(){
     caixaPerguntas.textContent = "Em 2049...";
     textoResultado.textContent = historiaFinal;
-    caixaAlternativas.textContent = ""; 
+    caixaAlternativas.textContent = "";
+    caixaResultado.classList.add("mostrar"); 
+    botaoJogarNovamente.addEventListener("click", jogaNovamente());
 }
-
 mostraPergunta();
